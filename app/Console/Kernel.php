@@ -2,10 +2,10 @@
 
 namespace App\Console;
 
-use App\Console\Commands\DataCrawl;
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\ScrapeCommand;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ScrapeCommand::class,
-        DataCrawl::class
+        'App\Console\Commands\ScrapeCommand',
+        'App\Console\Commands\DataCrawl'
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('data:crawl')->hourly();
-        $schedule->command('tgdd:crawl')->hourly();
+        $schedule->command('data:crawl')->everyMinute();
+        $schedule->command('tgdd:crawl')->everyMinute();
     }
 
     /**
